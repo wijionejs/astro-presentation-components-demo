@@ -35,15 +35,15 @@
   const counterValue = document.getElementById("astro-counter-value")!;
 
   function increment() {
-    counterValue.textContent = (
-      parseInt(counterValue.textContent!) + 1
-    ).toString();
+    const currentValue = parseInt(counterValue.textContent!);
+    const newValue = currentValue + 1;
+    counterValue.textContent = newValue.toString();
   }
 
   function decrement() {
-    counterValue.textContent = (
-      parseInt(counterValue.textContent!) - 1
-    ).toString();
+    const currentValue = parseInt(counterValue.textContent!);
+    const newValue = currentValue - 1;
+    counterValue.textContent = newValue.toString();
   }
 
   function reset() {
