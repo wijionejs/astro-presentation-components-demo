@@ -1,0 +1,17 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ReactCounter from "./_components/react/Counter";
+import AstroCounter from "./_components/astro/Counter.astro";
+import VueCounter from "./_components/vue/Counter.vue";
+import SolidCounter from "./_components/solid/Counter.jsx";
+---
+
+<Layout>
+  <h1 class="mb-10 text-4xl font-bold text-center">Frameworks combination</h1>
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 p-4">
+    <AstroCounter />
+    <ReactCounter client:load />
+    <VueCounter client:load />
+    <SolidCounter client:load />
+  </div>
+</Layout>

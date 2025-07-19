@@ -1,22 +1,88 @@
+---
+import background from "../assets/background.svg";
+import "../styles/global.css";
+
+const { isHomepage } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+  </head>
+  <body>
+    <div>
+      <img id="background" src={background.src} alt="" fetchpriority="high" />
+
+      <div
+        class:list={[
+          "flex gap-5 min-h-screen",
+          {
+            "items-center justify-center": isHomepage,
+            "items-start": !isHomepage,
+          },
+        ]}
+      >
+        <div class="p-10">
+          <nav
+            class="flex p-10 flex-col gap-5 border border-gray-400 rounded-md"
+          >
+            <a
+              class="font-bold text-xl text-nowrap transition hover:text-fuchsia-500"
+              href="/astro-components">Astro components</a
+            >
+            <a
+              class="font-bold text-xl text-nowrap transition hover:text-fuchsia-500"
+              href="/island-architecture">Islands architecture</a
+            >
+            <a
+              class="font-bold text-xl text-nowrap transition hover:text-fuchsia-500"
+              href="/frameworks-combination">Frameworks combination</a
+            >
+            <a
+              class="font-bold text-xl text-nowrap transition hover:text-fuchsia-500"
+              href="/component-composition">Component composition</a
+            >
+            <a
+              class="font-bold text-xl text-nowrap transition hover:text-fuchsia-500"
+              href="/state-sharing">State sharing</a
+            >
+          </nav>
+        </div>
+        {
+          !isHomepage && (
+            <div class="container mx-auto p-10">
+              <slot />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
+      Arial, sans-serif;
+    height: 100%;
+  }
+
+  #background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(100px);
+  }
 </style>

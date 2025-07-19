@@ -1,0 +1,56 @@
+<div class="p-6 bg-[#fae5fc] border-2 border-[#f041ff] rounded-lg shadow-md">
+  <div class="flex justify-between items-center mb-5">
+    <h1 class="text-xl text-center font-bold text-[#f041ff]">
+      Astro: <span id="astro-counter-value">0</span>
+    </h1>
+    <div class="flex gap-2">
+      <button
+        class="py-2 px-4 bg-[#f041ff] text-white rounded cursor-pointer hover:opacity-70 transition"
+        id="astro-increment-button"
+      >
+        +
+      </button>
+      <button
+        class="py-2 px-4 bg-[#f041ff] text-white rounded cursor-pointer hover:opacity-70 transition"
+        id="astro-decrement-button"
+      >
+        -
+      </button>
+      <button
+        class="py-2 px-4 bg-gray-300 text-gray-800 rounded cursor-pointer hover:opacity-70 transition"
+        id="astro-reset-button"
+      >
+        ↺
+      </button>
+    </div>
+  </div>
+  <slot />
+</div>
+
+<script>
+  import { counter } from "../../_store/counterStore.js";
+
+  const incrementButton = document.getElementById("astro-increment-button")!;
+  const decrementButton = document.getElementById("astro-decrement-button")!;
+  const resetButton = document.getElementById("astro-reset-button")!;
+  const counterValue = document.getElementById("astro-counter-value")!;
+
+  function increment() {
+    counter.set(counter.get() + 1);
+  }
+
+  function decrement() {
+    counter.set(counter.get() - 1);
+  }
+  function reset() {
+    counter.set(0);
+  }
+
+  incrementButton.addEventListener("click", increment);
+  decrementButton.addEventListener("click", decrement);
+  resetButton.addEventListener("click", reset);
+
+  counter.subscribe((value) => {
+    counterValue.textContent = value.toString();
+  });
+</script>
